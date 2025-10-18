@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  recovery_days: 1
+  escape_days: 1
+  image_url: MyString
+
+two:
+  name: MyString
+  recovery_days: 1
+  escape_days: 1
+  image_url: MyString
