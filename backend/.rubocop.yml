@@ -9,4 +9,6 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
 AllCops:
   Exclude:
-    - 'backend/db/'
+    - "**/db/cable_schema.rb"
+    - "**/db/cache_schema.rb"
+    - "**/db/queue_schema.rb"
