@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_17_151320) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_25_031105) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -36,11 +36,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_17_151320) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "github_user_id"
-    t.integer "recovered_animal_count"
+    t.string "name", null: false
+    t.string "uid", null: false
+    t.integer "recovered_animal_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "last_glass_check_date"
+    t.string "image_url"
+    t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
   add_foreign_key "user_animals", "animals"
