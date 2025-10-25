@@ -11,4 +11,4 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   end
 end
 
-OmniAuth.config.allowed_request_methods = [:get, :post]
+OmniAuth.config.allowed_request_methods = [ :get, :post ]
