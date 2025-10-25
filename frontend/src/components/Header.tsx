@@ -1,5 +1,7 @@
 "use client";
 
+import Image from 'next/image'
+
 type User = {
   id: number;
   name: string;
@@ -17,10 +19,12 @@ export default function Header({ user }: Props) {
       <h1 className="text-2xl font-bold tracking-wide">Github牧場</h1>
       <div className="flex items-center gap-4">
         {user && (
-          <img
+          <Image
             src={user.image_url}
             alt={user.name}
             className="w-8 h-8 rounded-full border border-gray-500 bg-white"
+            width={100}
+            height={100}
           />
         )}
 
