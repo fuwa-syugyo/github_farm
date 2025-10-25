@@ -48,4 +48,10 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "rack-cors"
+
+  gem "omniauth"
+  gem "omniauth-github"
+  gem "omniauth-rails_csrf_protection"
+
+  gem "dotenv-rails", groups: [ :development, :test ]
 end

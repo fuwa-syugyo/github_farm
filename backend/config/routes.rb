@@ -9,4 +9,9 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :animals, only: [ :index ]
+
+  get "/auth/:provider/callback", to: "sessions#create"
+  get "/api/current_user", to: "sessions#show"
+  get "/logout", to: "sessions#destroy"
+  delete "/logout", to: "sessions#destroy"
 end
