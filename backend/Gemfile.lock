@@ -379,6 +379,7 @@ DEPENDENCIES
   brakeman
   debug
   dotenv-rails
+  faraday
   kamal
   omniauth
   omniauth-github
