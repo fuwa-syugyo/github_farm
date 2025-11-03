@@ -14,4 +14,8 @@ Rails.application.routes.draw do
   get "/api/current_user", to: "sessions#show"
   get "/logout", to: "sessions#destroy"
   delete "/logout", to: "sessions#destroy"
+
+  namespace :api do
+    get "github/contributions", to: "githubs#contributions"
+  end
 end
