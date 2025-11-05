@@ -1,37 +1,32 @@
 {
-  "name": "github_farm",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.4",
-    "@mui/material": "^7.3.4",
-    "next": "15.5.6",
-    "react": "19.1.0",
-    "react-activity-calendar": "^2.7.15",
-    "react-dom": "19.1.0"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@eslint/js": "^9.38.0",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9.38.0",
-    "eslint-config-next": "15.5.6",
-    "eslint-plugin-react": "^7.37.5",
-    "globals": "^16.4.0",
-    "jiti": "^2.6.1",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "typescript-eslint": "^8.46.2"
-  }
+	"name": "github_farm",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev --turbopack",
+		"build": "next build --turbopack",
+		"start": "next start",
+		"lint": "biome check ."
+	},
+	"dependencies": {
+		"@emotion/react": "^11.14.0",
+		"@emotion/styled": "^11.14.1",
+		"@mui/icons-material": "^7.3.4",
+		"@mui/material": "^7.3.4",
+		"next": "15.5.6",
+		"react": "19.1.0",
+		"react-activity-calendar": "^2.7.15",
+		"react-dom": "19.1.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.3.3",
+		"@tailwindcss/postcss": "^4",
+		"@types/node": "^20",
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"globals": "^16.4.0",
+		"jiti": "^2.6.1",
+		"tailwindcss": "^4",
+		"typescript": "^5"
+	}
 }

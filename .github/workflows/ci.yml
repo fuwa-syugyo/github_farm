@@ -43,6 +43,27 @@ jobs:
       - name: Lint code for consistent style
         run: bundle exec rubocop -f github
 
+  biome:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm CI
+        working-directory: frontend
+
+      - name: Run Biome lint
+        run: npm run lint
+        working-directory: frontend
+
   test:
     runs-on: ubuntu-latest
 
