@@ -8,6 +8,6 @@ class CreateUserAnimalStats < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :user_animal_stats, [:user_id, :animal_id], unique: true
+    add_index :user_animal_stats, [ :user_id, :animal_id ], unique: true
   end
 end
