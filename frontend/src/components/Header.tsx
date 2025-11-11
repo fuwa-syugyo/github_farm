@@ -16,7 +16,7 @@ type Props = {
 export default function Header({ user }: Props) {
 	return (
 		<header className="w-full bg-green-500 text-white px-6 py-4 flex justify-between items-center shadow-md">
-			<h1 className="text-2xl font-bold tracking-wide">Github牧場</h1>
+			<h1 className="text-2xl font-bold tracking-wide">ぎっとはぶ牧場</h1>
 			<div className="flex items-center gap-4">
 				{user && (
 					<Image
