@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_11_130528) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_16_104035) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -29,9 +29,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_11_130528) do
     t.integer "recovered_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index [ "animal_id" ], name: "index_user_animal_stats_on_animal_id"
-    t.index [ "user_id", "animal_id" ], name: "index_user_animal_stats_on_user_id_and_animal_id", unique: true
-    t.index [ "user_id" ], name: "index_user_animal_stats_on_user_id"
+    t.index ["animal_id"], name: "index_user_animal_stats_on_animal_id"
+    t.index ["user_id", "animal_id"], name: "index_user_animal_stats_on_user_id_and_animal_id", unique: true
+    t.index ["user_id"], name: "index_user_animal_stats_on_user_id"
   end
 
   create_table "user_animals", force: :cascade do |t|
@@ -42,8 +42,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_11_130528) do
     t.date "last_feed_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index [ "animal_id" ], name: "index_user_animals_on_animal_id"
-    t.index [ "user_id" ], name: "index_user_animals_on_user_id"
+    t.integer "feed_days", default: 0, null: false
+    t.index ["animal_id"], name: "index_user_animals_on_animal_id"
+    t.index ["user_id"], name: "index_user_animals_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -54,7 +55,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_11_130528) do
     t.datetime "updated_at", null: false
     t.date "last_grass_check_date"
     t.string "image_url"
-    t.index [ "uid" ], name: "index_users_on_uid", unique: true
+    t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
   add_foreign_key "user_animal_stats", "animals"
