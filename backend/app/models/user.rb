@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :user_animals
   def self.find_or_create_from_auth_hash!(auth_hash)
     nickname = auth_hash[:info][:nickname]
     uid = auth_hash[:uid]

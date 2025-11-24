@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :animals, only: [ :index ]
+  resources :user_animals, only: [ :create, :index ]
 
   get "/auth/:provider/callback", to: "sessions#create"
   get "/api/current_user", to: "sessions#show"
