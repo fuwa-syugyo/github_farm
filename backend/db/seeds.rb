@@ -8,8 +8,16 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Animal.create!([
-  { name: "ハチドリ", recovery_days: 14, escape_days: 1 },
-  { name: "パンダ", recovery_days: 30, escape_days: 3 },
-  { name: "アルパカ", recovery_days: 50, escape_days: 5 }
-])
+animals = [
+  { name: "ひよこ", recovery_days: 14, escape_days: 1, image_url: "/images/hiyoko.png" },
+  { name: "パンダ", recovery_days: 30, escape_days: 3, image_url: "/images/panda.png" },
+  { name: "アルパカ", recovery_days: 50, escape_days: 5, image_url: "/images/alpaca.png" }
+]
+
+animals.each do |animal_data|
+  Animal.find_or_create_by!(name: animal_data[:name]) do |animal|
+    animal.recovery_days = animal_data[:recovery_days]
+    animal.escape_days = animal_data[:escape_days]
+    animal.image_url = animal_data[:image_url]
+  end
+end
