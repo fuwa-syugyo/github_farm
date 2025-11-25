@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_16_104035) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_25_132440) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -53,7 +53,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_16_104035) do
     t.integer "recovered_animal_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "last_grass_check_date"
+    t.datetime "last_grass_check_date"
     t.string "image_url"
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
