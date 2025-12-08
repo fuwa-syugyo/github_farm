@@ -17,8 +17,10 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
+  pool: 5
+  username: postgres
+  password: password
+  host: db
 
 development:
   <<: *default
@@ -80,10 +82,13 @@ test:
 #
 production:
   primary: &primary_production
-    <<: *default
-    database: github_farm_production
-    username: github_farm
-    password: <%= ENV["GITHUB_FARM_DATABASE_PASSWORD"] %>
+    adapter: postgresql
+    encoding: unicode
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+    database: <%= ENV.fetch("DB_NAME") %>
+    username: <%= ENV.fetch("DB_USER") %>
+    password: <%= ENV.fetch("DB_PASSWORD") %>
+    host: <%= ENV.fetch("DB_HOST") %>
   cache:
     <<: *primary_production
     database: github_farm_production_cache
