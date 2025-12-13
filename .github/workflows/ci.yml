@@ -24,6 +24,7 @@ jobs:
 
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bundle exec brakeman backend --no-pager
+        working-directory: backend
 
   rubocop:
     runs-on: ubuntu-latest
@@ -42,6 +43,7 @@ jobs:
 
       - name: Lint code for consistent style
         run: bundle exec rubocop -f github
+        working-directory: backend
 
   biome:
     runs-on: ubuntu-latest
@@ -99,6 +101,7 @@ jobs:
 
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
+        working-directory: backend
 
       - name: Run tests
         env:
