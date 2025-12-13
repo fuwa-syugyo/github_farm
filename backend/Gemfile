@@ -56,4 +56,7 @@ group :development, :test do
   gem "dotenv-rails", groups: [ :development, :test ]
 
   gem "faraday"
+
+  gem "sidekiq"
+  gem "redis"
 end
