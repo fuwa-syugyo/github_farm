@@ -21,6 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
+        working-directory: backend
 
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bundle exec brakeman backend --no-pager
@@ -40,6 +41,7 @@ jobs:
 
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
+        working-directory: backend
 
       - name: Lint code for consistent style
         run: bundle exec rubocop -f github
@@ -109,3 +111,4 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
           # REDIS_URL: redis://localhost:6379/0
         run: bundle exec rails db:test:prepare test
+        working-directory: backend
