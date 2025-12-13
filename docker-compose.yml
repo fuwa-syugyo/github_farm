@@ -17,9 +17,11 @@ services:
 
   web:
     build: ./backend
+    entrypoint: ./entrypoint.sh
     command: bundle exec rails s -p 3001 -b '0.0.0.0'
     volumes:
       - ./backend:/backend
+      - bundle:/usr/local/bundle
     ports:
       - "3001:3001"
     depends_on:
@@ -29,9 +31,11 @@ services:
 
   sidekiq:
     build: ./backend
+    entrypoint: ./entrypoint.sh
     command: bundle exec sidekiq
     volumes:
       - ./backend:/backend
+      - bundle:/usr/local_bundle
     depends_on:
       - db
       - redis
@@ -39,3 +43,4 @@ services:
 
 volumes:
   postgres-data:
+  bundle:
