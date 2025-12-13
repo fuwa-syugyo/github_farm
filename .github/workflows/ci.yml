@@ -24,7 +24,7 @@ jobs:
         working-directory: backend
 
       - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bundle exec brakeman backend --no-pager
+        run: bundle exec brakeman --no-pager
         working-directory: backend
 
   rubocop:
