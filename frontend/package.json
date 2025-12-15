@@ -6,7 +6,9 @@
 		"dev": "next dev --turbopack",
 		"build": "next build --turbopack",
 		"start": "next start",
-		"lint": "biome check ."
+		"lint": "biome check .",
+		"test": "vitest",
+		"test:run": "vitest run"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.14.0",
@@ -21,12 +23,16 @@
 	"devDependencies": {
 		"@biomejs/biome": "2.3.3",
 		"@tailwindcss/postcss": "^4",
+		"@testing-library/jest-dom": "^6.9.1",
+		"@testing-library/react": "^16.3.0",
 		"@types/node": "^20",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
 		"globals": "^16.4.0",
 		"jiti": "^2.6.1",
+		"jsdom": "^27.3.0",
 		"tailwindcss": "^4",
-		"typescript": "^5"
+		"typescript": "^5",
+		"vitest": "^4.0.15"
 	}
 }
