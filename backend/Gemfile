@@ -59,6 +59,7 @@ group :development, :test do
 
   gem "sidekiq"
   gem "redis"
+  gem "connection_pool", "~> 2.4.1"
 
   gem "rspec-rails", "~> 8.0.0"
 end
