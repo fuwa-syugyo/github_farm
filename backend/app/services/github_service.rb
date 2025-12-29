@@ -32,7 +32,12 @@ class GithubService
 
     variables = { user: @username, from:, to: }
 
-    response = Faraday.post(GITHUB_GRAPHQL_ENDPOINT) do |req|
+    conn = Faraday.new(url: GITHUB_GRAPHQL_ENDPOINT) do |f|
+      f.options.timeout = 5        # 全体
+      f.options.open_timeout = 2   # 接続
+    end
+
+    response = conn.post do |req|
       req.headers["Authorization"] = "Bearer #{@token}"
       req.headers["Content-Type"] = "application/json"
       req.body = { query:, variables: }.to_json
