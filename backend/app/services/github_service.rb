@@ -32,10 +32,22 @@ class GithubService
 
     variables = { user: @username, from:, to: }
 
-    response = Faraday.post(GITHUB_GRAPHQL_ENDPOINT) do |req|
+    conn = Faraday.new(url: GITHUB_GRAPHQL_ENDPOINT) do |f|
+      f.options.timeout = 5        # 全体
+      f.options.open_timeout = 2   # 接続
+    end
+
+    response = conn.post do |req|
       req.headers["Authorization"] = "Bearer #{@token}"
       req.headers["Content-Type"] = "application/json"
       req.body = { query:, variables: }.to_json
+    end
+
+    unless response.success?
+      Rails.logger.error(
+        "[GithubService] HTTP #{response.status}: #{response.body}"
+      )
+      return []
     end
 
     body = JSON.parse(response.body)
@@ -57,5 +69,23 @@ class GithubService
     end
 
     days
+
+  rescue Faraday::TimeoutError, Faraday::ConnectionFailed => e
+    Rails.logger.error(
+      "[GithubService] Network error: #{e.class} #{e.message}"
+    )
+    []
+
+  rescue JSON::ParserError => e
+    Rails.logger.error(
+      "[GithubService] JSON parse error: #{e.message}"
+    )
+    []
+
+  rescue StandardError => e
+    Rails.logger.error(
+      "[GithubService] Unexpected error: #{e.class} #{e.message}"
+    )
+    []
   end
 end
