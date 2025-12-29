@@ -69,5 +69,23 @@ class GithubService
     end
 
     days
+
+  rescue Faraday::TimeoutError, Faraday::ConnectionFailed => e
+    Rails.logger.error(
+      "[GithubService] Network error: #{e.class} #{e.message}"
+    )
+    []
+
+  rescue JSON::ParserError => e
+    Rails.logger.error(
+      "[GithubService] JSON parse error: #{e.message}"
+    )
+    []
+
+  rescue StandardError => e
+    Rails.logger.error(
+      "[GithubService] Unexpected error: #{e.class} #{e.message}"
+    )
+    []
   end
 end
