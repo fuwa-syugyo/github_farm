@@ -43,6 +43,13 @@ class GithubService
       req.body = { query:, variables: }.to_json
     end
 
+    unless response.success?
+      Rails.logger.error(
+        "[GithubService] HTTP #{response.status}: #{response.body}"
+      )
+      return []
+    end
+
     body = JSON.parse(response.body)
 
     if body["errors"]
