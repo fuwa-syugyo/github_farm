@@ -78,7 +78,7 @@ RSpec.describe GithubService do
         response = instance_double(
           Faraday::Response,
           success?: true,
-          body: { errors: ["something went wrong"] }.to_json
+          body: { errors: [ "something went wrong" ] }.to_json
         )
 
         allow(conn).to receive(:post).and_return(response)
