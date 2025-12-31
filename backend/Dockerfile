@@ -31,11 +31,11 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 # Install application gems
-COPY backend/Gemfile backend/Gemfile.lock ./
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
 # Copy application code
-COPY backend .
+COPY . .
 
 EXPOSE 3001
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
