@@ -7,7 +7,7 @@
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.2.2
+ARG RUBY_VERSION=3.4.8
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
@@ -25,6 +25,8 @@ FROM base AS build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential \
     libpq-dev \
+    libyaml-dev \
+    pkg-config \
     curl \
     nodejs \
     npm && \
