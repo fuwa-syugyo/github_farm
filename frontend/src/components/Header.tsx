@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { useState } from "react"
 import AnimalSelectionModal from "./AnimalSelectionModal"
+import NotificationSettingModal from "./NotificationSettingModal"
 
 type User = {
 	id: number
@@ -25,6 +26,13 @@ export default function Header({ user }: Props) {
 				<div className="flex items-center gap-4">
 					{user && (
 						<>
+							<button
+								type="button"
+								onClick={() => setIsModalOpen(true)}
+								className="bg-white text-black border border-black px-4 py-2 rounded hover:bg-gray-100 font-bold"
+							>
+								通知設定
+							</button>
 							<button
 								type="button"
 								onClick={() => setIsModalOpen(true)}
@@ -66,6 +74,10 @@ export default function Header({ user }: Props) {
 				</div>
 			</header>
 			<AnimalSelectionModal
+				isOpen={isModalOpen}
+				onClose={() => setIsModalOpen(false)}
+			/>
+			<NotificationSettingModal
 				isOpen={isModalOpen}
 				onClose={() => setIsModalOpen(false)}
 			/>
