@@ -37,7 +37,7 @@ export default function Page() {
 				>
 					GitHub
 				</a>
-				© 2025 fuwa-syugyo
+				© 2026 fuwa-syugyo
 			</footer>
 		</div>
 	)
