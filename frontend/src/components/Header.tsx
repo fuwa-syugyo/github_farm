@@ -17,7 +17,8 @@ type Props = {
 }
 
 export default function Header({ user }: Props) {
-	const [isModalOpen, setIsModalOpen] = useState(false)
+	const [isNotificationOpen, setIsNotificationOpen] = useState(false)
+	const [isAnimalOpen, setIsAnimalOpen] = useState(false)
 
 	return (
 		<>
@@ -28,14 +29,14 @@ export default function Header({ user }: Props) {
 						<>
 							<button
 								type="button"
-								onClick={() => setIsModalOpen(true)}
+								onClick={() => setIsNotificationOpen(true)}
 								className="bg-white text-black border border-black px-4 py-2 rounded hover:bg-gray-100 font-bold"
 							>
 								通知設定
 							</button>
 							<button
 								type="button"
-								onClick={() => setIsModalOpen(true)}
+								onClick={() => setIsAnimalOpen(true)}
 								className="bg-white text-black border border-black px-4 py-2 rounded hover:bg-gray-100 font-bold"
 							>
 								動物選択
@@ -73,13 +74,13 @@ export default function Header({ user }: Props) {
 					)}
 				</div>
 			</header>
-			<AnimalSelectionModal
-				isOpen={isModalOpen}
-				onClose={() => setIsModalOpen(false)}
-			/>
 			<NotificationSettingModal
-				isOpen={isModalOpen}
-				onClose={() => setIsModalOpen(false)}
+				isOpen={isNotificationOpen}
+				onClose={() => setIsNotificationOpen(false)}
+			/>
+			<AnimalSelectionModal
+				isOpen={isAnimalOpen}
+				onClose={() => setIsAnimalOpen(false)}
 			/>
 		</>
 	)
