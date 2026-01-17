@@ -80,9 +80,7 @@ export default function NotificationSettingModal({ isOpen, onClose }: Props) {
 
 				<div className="bg-white p-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto">
 					<h2 className="text-2xl font-bold mb-4">通知設定</h2>
-					{/* 時刻 + トグル */}
 					<div className="mt-6 flex items-center justify-between rounded-md border px-4 py-6">
-						{/* プルダウン（Select） */}
 						<Select
 							value={String(notify_hour)}
 							onValueChange={(v) => setNotify_hour(Number(v))}
