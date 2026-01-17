@@ -1,7 +1,7 @@
 class NotificationSetting < ApplicationRecord
   belongs_to :user
 
-  enum notification_type: {
+  enum :notification_type, {
     grass_remind: 0,
     animal_recovered: 1,
     animal_escape_warning: 2

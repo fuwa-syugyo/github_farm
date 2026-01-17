@@ -11,26 +11,60 @@ import {
 } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
 
+type NotificationSetting = {
+	notify_hour: number
+	enabled: boolean
+} | null
+
 type Props = {
 	isOpen: boolean
 	onClose: () => void
 }
 
 export default function NotificationSettingModal({ isOpen, onClose }: Props) {
+	const [setting, setSetting] = useState<NotificationSetting>(null)
+
+	const [notify_hour, setNotify_hour] = useState(21)
+	const [enabled, setEnabled] = useState(true)
+
 	useEffect(() => {
-		if (isOpen) {
-			// TODO: 現在の通知時刻とactiveを取得
+		if (!isOpen) return
+
+		const fetchSetting = async () => {
+			const res = await fetch("/backend/api/notification_setting", {
+				credentials: "include",
+			})
+			if (!res.ok) return
+
+			const json = await res.json()
+
+			if (json.notification_setting) {
+				setSetting(json.notification_setting)
+				setNotify_hour(json.notification_setting.notify_hour)
+				setEnabled(json.notification_setting.enabled)
+			} else {
+				setSetting(null)
+			}
 		}
+		fetchSetting()
 	}, [isOpen])
 
-	const [enabled, setEnabled] = useState(true)
-	const [time, setTime] = useState("21:00")
-
-	// TODO: 通知時刻のプルダウンとactiveのトグルスイッチを保存する処理を追加
 	if (!isOpen) return null
 
-	const handleSave = () => {
-		console.log({ enabled, time })
+	const handleSave = async () => {
+		await fetch("/backend/api/notification_setting", {
+			method: setting ? "PUT" : "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				notification_setting: {
+					notify_hour,
+					enabled,
+				},
+			}),
+		})
+		onClose()
 	}
 
 	return (
@@ -46,22 +80,21 @@ export default function NotificationSettingModal({ isOpen, onClose }: Props) {
 
 				<div className="bg-white p-6 rounded-lg shadow-lg w-full max-h-[80vh] overflow-y-auto">
 					<h2 className="text-2xl font-bold mb-4">通知設定</h2>
-					{/* 時刻 + トグル */}
 					<div className="mt-6 flex items-center justify-between rounded-md border px-4 py-6">
-						{/* プルダウン（Select） */}
-						<Select value={time} onValueChange={setTime} disabled={!enabled}>
+						<Select
+							value={String(notify_hour)}
+							onValueChange={(v) => setNotify_hour(Number(v))}
+							disabled={!enabled}
+						>
 							<SelectTrigger className="w-32 text-lg font-semibold">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent>
-								<SelectItem value="12:00">12:00</SelectItem>
-								<SelectItem value="15:00">15:00</SelectItem>
-								<SelectItem value="18:00">18:00</SelectItem>
-								<SelectItem value="19:00">19:00</SelectItem>
-								<SelectItem value="20:00">20:00</SelectItem>
-								<SelectItem value="21:00">21:00</SelectItem>
-								<SelectItem value="22:00">22:00</SelectItem>
-								<SelectItem value="23:00">23:00</SelectItem>
+								{[12, 15, 18, 19, 20, 21, 22, 23].map((h) => (
+									<SelectItem key={h} value={String(h)}>
+										{h}:00
+									</SelectItem>
+								))}
 							</SelectContent>
 						</Select>
 						<Switch checked={enabled} onCheckedChange={setEnabled} />
