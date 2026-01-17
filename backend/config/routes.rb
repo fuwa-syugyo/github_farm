@@ -18,6 +18,6 @@ Rails.application.routes.draw do
 
   namespace :api do
     get "github/contributions", to: "githubs#contributions"
-    resource :notification_setting, only: [:show, :create, :update]
+    resource :notification_setting, only: [ :show, :create, :update ]
   end
 end
