@@ -6,7 +6,6 @@ class GrassReminderService
       .where(notify_hour: hour)
       .where(enabled: true)
       .find_each do |setting|
-
       user = setting.user
 
       next if user.grass_today?
