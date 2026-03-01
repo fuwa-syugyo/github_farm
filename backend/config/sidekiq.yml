@@ -1,0 +1,10 @@
+:concurrency: 5
+:queues:
+  - default
+
+:schedule:
+  grass_reminder_job:
+    cron: "0 * * * *"
+    class: "GrassReminderJob"
+    queue: default
+    timezone: "Asia/Tokyo"
