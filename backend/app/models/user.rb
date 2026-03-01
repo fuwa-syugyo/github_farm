@@ -12,4 +12,10 @@ class User < ApplicationRecord
       user.image_url = image_url
     end
   end
+
+  def grass_today?
+    return false if last_contribution_date.blank?
+
+    last_contribution_date == Date.current
+  end
 end
