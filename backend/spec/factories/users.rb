@@ -1,8 +1,7 @@
 FactoryBot.define do
   factory :user do
     name  { "testuser" }
-    id { 12345 }
-    uid { "123456" }
+    uid { SecureRandom.uuid }
 
     last_grass_check_date { nil }
     last_contribution_date { nil }
