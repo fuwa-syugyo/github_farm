@@ -43,6 +43,7 @@ gem "omniauth-rails_csrf_protection"
 
 gem "faraday"
 gem "sidekiq"
+gem "sidekiq-cron"
 gem "redis"
 gem "connection_pool", "~> 2.4.1"
 
