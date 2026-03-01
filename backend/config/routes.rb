@@ -1,4 +1,4 @@
-require 'sidekiq/web'
+require "sidekiq/web"
 
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -22,5 +22,5 @@ Rails.application.routes.draw do
     get "github/contributions", to: "githubs#contributions"
     resource :notification_setting, only: [ :show, :create, :update ]
   end
-  mount Sidekiq::Web => '/sidekiq'
+  mount Sidekiq::Web => "/sidekiq"
 end
