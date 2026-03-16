@@ -29,9 +29,11 @@ export default function GithubGrass({ user }: Props) {
 
 	useEffect(() => {
 		if (!user) return
-		fetch("http://localhost:3001/api/github/contributions", {
+		const API_URL = process.env.NEXT_PUBLIC_API_URL
+
+		fetch(`${API_URL}/api/github/contributions`, {
 			credentials: "include",
-		}) // 本番用はまた後で
+		})
 			.then((res) => res.json())
 			.then((json) => {
 				if (!Array.isArray(json)) {

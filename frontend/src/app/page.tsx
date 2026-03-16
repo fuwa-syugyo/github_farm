@@ -8,8 +8,11 @@ export default function Page() {
 	const [user, setUser] = useState(null)
 
 	useEffect(() => {
+		const API_URL = process.env.NEXT_PUBLIC_API_URL
+
 		const fetchCurrentUser = async () => {
-			const res = await fetch("http://localhost:3001/api/current_user", {
+			console.log(process.env.NEXT_PUBLIC_DEV_BE_API_URL)
+			const res = await fetch(`${API_URL}/api/current_user`, {
 				credentials: "include",
 				cache: "no-store",
 			})
