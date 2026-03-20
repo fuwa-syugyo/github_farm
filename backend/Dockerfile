@@ -40,4 +40,4 @@ RUN bundle install
 COPY . .
 
 EXPOSE 3001
-CMD ["bash", "-c", "bundle exec rails server -b 0.0.0.0 -p ${PORT:-3001}"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
