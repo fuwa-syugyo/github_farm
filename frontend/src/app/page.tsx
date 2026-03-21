@@ -11,7 +11,6 @@ export default function Page() {
 		const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 		const fetchCurrentUser = async () => {
-			console.log(process.env.NEXT_PUBLIC_DEV_BE_API_URL)
 			const res = await fetch(`${API_URL}/api/current_user`, {
 				credentials: "include",
 				cache: "no-store",
