@@ -19,6 +19,7 @@ type Props = {
 export default function Header({ user }: Props) {
 	const [isNotificationOpen, setIsNotificationOpen] = useState(false)
 	const [isAnimalOpen, setIsAnimalOpen] = useState(false)
+	const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 	return (
 		<>
@@ -55,7 +56,7 @@ export default function Header({ user }: Props) {
 						<button
 							type="button"
 							onClick={() => {
-								window.location.href = "http://localhost:3001/logout"
+								window.location.href = `${API_URL}/logout`
 							}}
 							className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
 						>
@@ -65,7 +66,7 @@ export default function Header({ user }: Props) {
 						<button
 							type="button"
 							onClick={() => {
-								window.location.href = "http://localhost:3001/auth/github"
+								window.location.href = `${API_URL}/auth/github`
 							}}
 							className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800"
 						>
