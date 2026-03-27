@@ -4,6 +4,10 @@ services:
   db:
     image: postgres:16
     container_name: github-farm-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: app_development
     env_file: backend/.env
     ports:
       - "5432:5432"
