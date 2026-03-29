@@ -112,11 +112,8 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          # REDIS_URL: redis://localhost:6379/0
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432
-          DB_NAME: github_farm_test
+          DB_HOST: postgres
           DB_USER: postgres
-          DB_PASSWORD: postgres
-          DB_HOST: localhost
+          DB_PASSWORD: password
         run: bundle exec rails db:test:prepare test
         working-directory: backend
