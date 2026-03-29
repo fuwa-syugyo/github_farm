@@ -72,6 +72,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      DB_HOST: postgres
+      DB_USER: postgres
+
     services:
       postgres:
         image: postgres:16
