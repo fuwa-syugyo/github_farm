@@ -58,7 +58,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  host: postgres
+  host: <%= ENV.fetch("DB_USER", "localhost") %>
   username: postgres
   password: password
 
