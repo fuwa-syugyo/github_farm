@@ -58,7 +58,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: github_farm_test
+  database: <%= ENV.fetch("DB_NAME", "github_farm_test") %>
+  host: <%= ENV.fetch("DB_HOST", "localhost") %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -85,7 +86,7 @@ production:
     adapter: postgresql
     encoding: unicode
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-    database: <%= ENV.fetch("DB_NAME") %>
+    database: <%= ENV.fetch("DB_NAME", "dummy") %>
     username: <%= ENV.fetch("DB_USER") %>
     password: <%= ENV.fetch("DB_PASSWORD") %>
     host: <%= ENV.fetch("DB_HOST") %>
