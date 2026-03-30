@@ -75,6 +75,7 @@ jobs:
     env:
       DB_HOST: postgres
       DB_USER: postgres
+      DB_NAME: github_farm_test
 
     services:
       postgres:
@@ -113,7 +114,6 @@ jobs:
         env:
           RAILS_ENV: test
           DB_HOST: postgres
-          DB_NAME: github_farm_test
           DB_USER: postgres
           DB_PASSWORD: password
         run: bundle exec rails db:test:prepare test
