@@ -12,6 +12,9 @@ class SessionsController < ApplicationController
   end
 
   def show
+    puts "テスト"
+    Rails.logger.info request.origin
+    puts request.headers["Origin"]
     if current_user
       render json: { logged_in: true, user: current_user }
     else
