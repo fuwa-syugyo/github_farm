@@ -3,18 +3,15 @@ class SessionsController < ApplicationController
     user = User.find_or_create_from_auth_hash!(request.env["omniauth.auth"])
     session[:user_id] = user.id
 
-    redirect_to "#{ENV.fetch('FRONTEND_URL', 'http://localhost:3000')}"
+    redirect_to "#{ENV.fetch('FRONTEND_URL', 'http://localhost:3000')}", allow_other_host: true
   end
 
   def destroy
     reset_session
-    redirect_to "#{ENV.fetch('FRONTEND_URL', 'http://localhost:3000')}"
+    redirect_to "#{ENV.fetch('FRONTEND_URL', 'http://localhost:3000')}", allow_other_host: true
   end
 
   def show
-    puts "テスト"
-    Rails.logger.info request.origin
-    puts request.headers["Origin"]
     if current_user
       render json: { logged_in: true, user: current_user }
     else
