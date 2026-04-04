@@ -53,6 +53,7 @@ export default function NotificationSettingModal({ isOpen, onClose }: Props) {
 
 	const handleSave = async () => {
 		await fetch("/backend/api/notification_setting", {
+			credentials: "include",
 			method: setting ? "PUT" : "POST",
 			headers: {
 				"Content-Type": "application/json",

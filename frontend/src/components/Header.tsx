@@ -56,7 +56,9 @@ export default function Header({ user }: Props) {
 						<button
 							type="button"
 							onClick={async () => {
-								await fetch(`${API_URL}/health`)
+								await fetch(`${API_URL}/health`, {
+									credentials: "include",
+								})
 								window.location.href = `${API_URL}/logout`
 							}}
 							className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
@@ -67,7 +69,9 @@ export default function Header({ user }: Props) {
 						<button
 							type="button"
 							onClick={async () => {
-								await fetch(`${API_URL}/health`)
+								await fetch(`${API_URL}/health`, {
+									credentials: "include",
+								})
 								window.location.href = `${API_URL}/auth/github`
 							}}
 							className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800"
