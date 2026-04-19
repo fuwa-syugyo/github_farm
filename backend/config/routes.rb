@@ -24,4 +24,7 @@ Rails.application.routes.draw do
     resource :notification_setting, only: [ :show, :create, :update ]
   end
   mount Sidekiq::Web => "/sidekiq"
+
+  post "/push_subscriptions", to: "push_subscriptions#create"
+  post "/push", to: "pushes#create"
 end
