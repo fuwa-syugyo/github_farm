@@ -4,12 +4,50 @@ import { useEffect, useState } from "react"
 import GithubGrass from "@/components/GithubGrass"
 import Header from "@/components/Header"
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL as string
+const VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY as string
+
+if (!API_URL) throw new Error("API_URL is not defined")
+if (!VAPID_PUBLIC_KEY) throw new Error("VAPID key is not defined")
+
+function urlBase64ToUint8Array(base64String: string) {
+	const padding = "=".repeat((4 - (base64String.length % 4)) % 4)
+	const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/")
+
+	const rawData = window.atob(base64)
+	return Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)))
+}
+
 export default function Page() {
 	const [user, setUser] = useState(null)
+	const registerPush = async () => {
+		await Notification.requestPermission()
+
+		const registration = await navigator.serviceWorker.register("/sw.js")
+
+		const subscription = await registration.pushManager.subscribe({
+			userVisibleOnly: true,
+			applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
+		})
+
+		await fetch(`${API_URL}/push_subscriptions`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ subscription }),
+			credentials: "include",
+		})
+	}
+
+	const sendPush = async () => {
+		await fetch(`${API_URL}/push`, {
+			method: "POST",
+			credentials: "include",
+		})
+	}
 
 	useEffect(() => {
-		const API_URL = process.env.NEXT_PUBLIC_API_URL
-
 		const fetchCurrentUser = async () => {
 			const res = await fetch(`${API_URL}/api/current_user`, {
 				credentials: "include",
@@ -26,6 +64,23 @@ export default function Page() {
 	return (
 		<div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
 			<Header user={user} />
+			<div style={{ padding: 40 }}>
+				<button
+					type="button"
+					onClick={registerPush}
+					className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800"
+				>
+					Push登録
+				</button>
+
+				<button
+					type="button"
+					onClick={sendPush}
+					className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800"
+				>
+					テスト通知送信
+				</button>
+			</div>
 			<main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
 				<GithubGrass user={user} />
 			</main>
