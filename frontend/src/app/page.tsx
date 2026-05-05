@@ -4,10 +4,8 @@ import { useEffect, useState } from "react"
 import GithubGrass from "@/components/GithubGrass"
 import Header from "@/components/Header"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL as string
 const VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY as string
 
-if (!API_URL) throw new Error("API_URL is not defined")
 if (!VAPID_PUBLIC_KEY) throw new Error("VAPID key is not defined")
 
 function urlBase64ToUint8Array(base64String: string) {
@@ -30,7 +28,7 @@ export default function Page() {
 			applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
 		})
 
-		await fetch(`${API_URL}/push_subscriptions`, {
+		await fetch(`/api/push_subscriptions`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -41,7 +39,7 @@ export default function Page() {
 	}
 
 	const sendPush = async () => {
-		await fetch(`${API_URL}/push`, {
+		await fetch(`/api/push`, {
 			method: "POST",
 			credentials: "include",
 		})
@@ -49,7 +47,7 @@ export default function Page() {
 
 	useEffect(() => {
 		const fetchCurrentUser = async () => {
-			const res = await fetch(`${API_URL}/api/current_user`, {
+			const res = await fetch(`/api/current_user`, {
 				credentials: "include",
 				cache: "no-store",
 			})
