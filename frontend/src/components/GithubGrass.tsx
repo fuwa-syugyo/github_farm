@@ -29,9 +29,8 @@ export default function GithubGrass({ user }: Props) {
 
 	useEffect(() => {
 		if (!user) return
-		const API_URL = process.env.NEXT_PUBLIC_API_URL
 
-		fetch(`${API_URL}/api/github/contributions`, {
+		fetch(`/api/github/contributions`, {
 			credentials: "include",
 		})
 			.then((res) => res.json())

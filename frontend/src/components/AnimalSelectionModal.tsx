@@ -28,13 +28,12 @@ export default function AnimalSelectionModal({ isOpen, onClose }: Props) {
 
 	useEffect(() => {
 		if (isOpen) {
-			const API_URL = process.env.NEXT_PUBLIC_API_URL
-			fetch(`${API_URL}/animals`, { cache: "no-store" })
+			fetch(`/api/animals`, { cache: "no-store" })
 				.then((res) => res.json())
 				.then((data) => setAnimals(data))
 				.catch((err) => console.error("Failed to fetch animals:", err))
 
-			fetch(`${API_URL}/user_animals`, {
+			fetch(`/api/user_animals`, {
 				credentials: "include",
 				cache: "no-store",
 			})
@@ -68,8 +67,7 @@ export default function AnimalSelectionModal({ isOpen, onClose }: Props) {
 		}
 
 		try {
-			const API_URL = process.env.NEXT_PUBLIC_API_URL
-			const res = await fetch(`${API_URL}/user_animals`, {
+			const res = await fetch(`/api/user_animals`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

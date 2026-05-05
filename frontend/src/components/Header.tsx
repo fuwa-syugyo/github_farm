@@ -19,7 +19,6 @@ type Props = {
 export default function Header({ user }: Props) {
 	const [isNotificationOpen, setIsNotificationOpen] = useState(false)
 	const [isAnimalOpen, setIsAnimalOpen] = useState(false)
-	const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 	return (
 		<>
@@ -56,10 +55,10 @@ export default function Header({ user }: Props) {
 						<button
 							type="button"
 							onClick={async () => {
-								await fetch(`${API_URL}/health`, {
+								await fetch(`/api/health`, {
 									credentials: "include",
 								})
-								window.location.href = `${API_URL}/logout`
+								window.location.href = `/api/logout`
 							}}
 							className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
 						>
@@ -69,10 +68,10 @@ export default function Header({ user }: Props) {
 						<button
 							type="button"
 							onClick={async () => {
-								await fetch(`${API_URL}/health`, {
+								await fetch(`/api/health`, {
 									credentials: "include",
 								})
-								window.location.href = `${API_URL}/auth/github`
+								window.location.href = `/api/auth/github`
 							}}
 							className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800"
 						>
